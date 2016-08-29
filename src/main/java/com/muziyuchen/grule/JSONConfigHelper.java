@@ -1,12 +1,11 @@
 package com.muziyuchen.grule;
 
+import java.lang.reflect.Field;
+import java.util.Map.Entry;
+
 import com.alibaba.fastjson.JSONObject;
-import com.muziyuchen.grule.Constants;
-import com.muziyuchen.grule.Unit;
 import com.muziyuchen.grule.action.Action;
 import com.muziyuchen.grule.condition.Condition;
-
-import java.lang.reflect.Field;
 
 /**
  * Created by LI_ZHEN on 2016/5/6.
@@ -17,7 +16,7 @@ class JSONConfigHelper {
         Unit unit = null;
         if (jo != null) {
             String type = jo.getString(Constants.JSON_FIELDNAME_TYPE);
-            Class unitClass = Class.forName(jo.getString(Constants.JSON_FIELDNAME_CLASS));
+            Class<?> unitClass = Class.forName(jo.getString(Constants.JSON_FIELDNAME_CLASS));
 
             if ("action".equals(type)) {
                 Action action = (Action) unitClass.newInstance();
@@ -43,9 +42,18 @@ class JSONConfigHelper {
         return unit;
     }
 
-    private static void configFields(JSONObject jo, Class unitClass, Object instance) {
+    private static void configFields(JSONObject jo, Class<?> unitClass, Object instance) {
         if (jo != null) {
-            jo.forEach( (key, value) -> {
+        	for(Entry<String, Object> entry : jo.entrySet()){
+        		try{
+        			Field field = unitClass.getDeclaredField(entry.getKey());
+        			field.setAccessible(true);
+        			field.set(instance, entry.getValue());
+        		}catch(NoSuchFieldException | IllegalAccessException e){
+        			e.printStackTrace();
+        		}
+        	}
+            /*jo.forEach( (key, value) -> {
                 try {
                     Field field = unitClass.getDeclaredField(key);
                     field.setAccessible(true);
@@ -53,7 +61,7 @@ class JSONConfigHelper {
                 } catch (NoSuchFieldException | IllegalAccessException e) {
                     e.printStackTrace();
                 }
-            });
+            });*/
         }
     }
 
