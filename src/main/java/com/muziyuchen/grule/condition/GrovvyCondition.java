@@ -14,7 +14,7 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class GrovvyCondition extends AbstractCondition {
 
-    private Class groovyClass = null;
+    private Class<?> groovyClass = null;
 
     private String path;
     private String script;

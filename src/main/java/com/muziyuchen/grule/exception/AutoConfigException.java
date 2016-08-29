@@ -5,7 +5,13 @@ package com.muziyuchen.grule.exception;
  */
 public class AutoConfigException extends Exception {
 
-    public AutoConfigException(String message) {
+    /** 
+	 * serialVersionUID:序列化 
+	 * @since JDK 1.7 
+	 */ 
+	private static final long serialVersionUID = 6339522773034043433L;
+
+	public AutoConfigException(String message) {
         super(message);
     }
 

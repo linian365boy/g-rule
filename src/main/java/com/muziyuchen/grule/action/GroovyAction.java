@@ -14,7 +14,7 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class GroovyAction extends AbstractAction {
 
-    private Class groovyClass = null;
+    private Class<?> groovyClass = null;
 
     private String path;
     private String script;

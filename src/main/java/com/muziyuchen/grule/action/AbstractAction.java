@@ -1,8 +1,6 @@
 package com.muziyuchen.grule.action;
 
 import com.muziyuchen.grule.Unit;
-import com.muziyuchen.grule.condition.Condition;
-import com.muziyuchen.grule.context.Context;
 
 /**
  * 抽象动作类

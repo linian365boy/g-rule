@@ -42,7 +42,7 @@ public class GroovyManager {
      * @param args 参数列表
      * @return 执行结果
      * */
-    public Object invokeMethod(Class groovyClass, String methodName, Object... args) throws NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
+    public Object invokeMethod(Class<?> groovyClass, String methodName, Object... args) throws NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
         if (groovyClass != null) {
             try {
                 Method runMethod = groovyClass.getMethod(methodName, Context.class);
